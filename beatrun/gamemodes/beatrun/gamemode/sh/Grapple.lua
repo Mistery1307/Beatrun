@@ -11,7 +11,9 @@ if CLIENT then
 		if not ply:Alive() or Course_Name ~= "" then return end
 		if ply:notUsingRH() then return end
 		if ply:GetMoveType() == MOVETYPE_NOCLIP then return end
-		if GetGlobalBool("GM_INFECTION") or GetGlobalBool("GM_DATATHEFT") or GetGlobalBool("GM_DEATHMATCH") then return end
+		--if GetGlobalBool("GM_INFECTION") or GetGlobalBool("GM_DATATHEFT") or GetGlobalBool("GM_DEATHMATCH") then return end
+		if GetGlobalBool("GM_INFECTION") and not GetConVar("Beatrun_InfectedCanGrapple"):GetBool() then return end
+		if GetGlobalBool("GM_INFECTION") and GetConVar("Beatrun_InfectedCanGrapple"):GetBool() and not (ply:GetNW2Bool("Infected") or ply:GetNW2Entity("Swingrope"):IsValid()) then return end
 
 		if not ply.GrappleHUD_tr then
 			ply.GrappleHUD_tr = {}
@@ -55,7 +57,9 @@ hook.Add("SetupMove", "Grapple", function(ply, mv, cmd)
 	if ply:GetMantle() ~= 0 or ply:GetClimbing() ~= 0 then return end
 	if ply:GetInfoNum("Beatrun_DisableGrapple", 0) == 1 and Course_Name == "" then return end
 	if not ply:Alive() or Course_Name ~= "" and ply:GetNW2Int("CPNum", 1) ~= -1 and not ply:GetNW2Entity("Swingrope"):IsValid() then return end
-	if GetGlobalBool("GM_INFECTION") or GetGlobalBool("GM_DATATHEFT") or GetGlobalBool("GM_DEATHMATCH") and not ply:GetNW2Entity("Swingrope"):IsValid() then return end
+	--if GetGlobalBool("GM_INFECTION") or GetGlobalBool("GM_DATATHEFT") or GetGlobalBool("GM_DEATHMATCH") and not ply:GetNW2Entity("Swingrope"):IsValid() then return end
+	if GetGlobalBool("GM_INFECTION") and not GetConVar("Beatrun_InfectedCanGrapple"):GetBool() then return end
+	if GetGlobalBool("GM_INFECTION") and GetConVar("Beatrun_InfectedCanGrapple"):GetBool() and not (ply:GetNW2Bool("Infected") or ply:GetNW2Entity("Swingrope"):IsValid()) then return end
 
 	local usingrh = ply:UsingRH()
 
