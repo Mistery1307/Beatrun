@@ -329,6 +329,9 @@ hook.Add("PopulateToolMenu", "Beatrun_ToolMenu", function()
 		panel:NumSlider("#beatrun.toolsmenu.gamemodes.infectiongametime", "Beatrun_InfectionGameTime", 30, 600, 0)
 		panel:Help("#beatrun.toolsmenu.gamemodes.infectiontime")
 
+		panel:CheckBox("#beatrun.infectedcangrapple", "Beatrun_InfectedCanGrapple")
+		panel:ControlHelp("#beatrun.infectedcangrappledesc")
+
 		local InfectionButton = vgui.Create("DButton", panel)
 		InfectionButton:SetText("#beatrun.toolsmenu.gamemodes.infection")
 		InfectionButton:SetSize(0, 20)
